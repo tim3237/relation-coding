@@ -264,7 +264,7 @@ class RIPE(RelationEncoder):
             cache_len = 0
             cache_positions = None
 
-        all_rel_distance_ids = positions_to_relation_labels(
+        all_rel_distance_ids = position_to_relation_labels(
             position_ids, self.causal, self.cap_dist, cache_positions=cache_positions)
         if self.causal and attention_mask is None:
             # broadcastable 1-0-mask
