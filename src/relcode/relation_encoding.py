@@ -251,8 +251,10 @@ class RIPE(RelationEncoder):
             if len(position_ids.shape) != 2:
                 raise ValueError("position_ids are expected to be of shape [batch_size, new_seq_len]. " +
                                  f"Provided shape: {position_ids.shape}")
-            cache_len = past_key_value.get_seq_length(
-                0 if self.layer_ids is None else self.layer_ids[0], position_ids.shape[-1]) - position_ids.shape[-1]
+            cache_layer_id = 0 if self.layer_ids is None else self.layer_ids[0]
+            cache_len = past_key_value.get_seq_length(cache_layer_id)
+            # assuming cache updates fill their cache slots and return the result -- capped by maximum cache size
+            cache_len = min(cache_len, past_key_value.get_max_cache_shape(cache_layer_id) - embeddings.shape[1])
             if cache_len > 0:
                 min_pos_id = position_ids.min(dim=-1)[0]
                 cache_starts = min_pos_id - cache_len
