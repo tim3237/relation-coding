@@ -17,7 +17,7 @@ Top-1 Accuracy during training was as follows:
 
 ![Training Top-1 Accuracy](https://github.com/tim3237/experiments/blob/relcode/test_output/train_top1.png?raw=true)
 
-It appears that `+` setups require more iterations as well as pure `v` setups compared to pure `a`. However, since all relation farther than `3` steps away were merged into `a >3` class for each direction, a model could already achieve `95.3%` accuracy by predicting only the extreme distance classes. The classifier was trained with higher weights for closer-distance relations, but these weights did not reflect the actual class imbalance. Therefore, we further inspect a random input/output example to see whether local relations are reconstructed reasonably.
+It appears that `+` setups require more iterations as well as pure `v` setups compared to pure `a`. However, since all relation farther than `3` steps away were merged into a `>3` class for each direction, a model could already achieve `95.3%` accuracy by predicting only the extreme distance classes. The classifier was trained with higher weights for closer-distance relations, but these weights did not reflect the actual class imbalance. Therefore, we further inspect a random input/output example to see whether local relations are reconstructed reasonably.
 
 ![Example input, top-1 predictions, and d-top-1 predictions](https://github.com/tim3237/experiments/blob/relcode/test_output/train_sample.png?raw=true)
 
